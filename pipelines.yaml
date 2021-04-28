@@ -48,4 +48,5 @@ pipelines:
           outputResources:
             - name: S_GoPublishBinary_0028_BuildInfo
           targetRepository: local-gen
-#          autoPublishBuildInfo: true
+          autoPublishBuildInfo: true
+
