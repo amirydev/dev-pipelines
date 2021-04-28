@@ -55,3 +55,26 @@ pipelines:
             - name: R_BuildInfo
           outputResources:
             - name: R_ReleaseBundle
+  - name: go_build_publish
+    steps:
+      - name: S_GoBuild
+        type: GoBuild
+        configuration:
+          environmentVariables:
+            JFROG_CLI_BUILD_NAME: other_go_build
+            JFROG_CLI_BUILD_NUMBER: ${run_id}
+          inputResources:
+            - name: R_GitRepo
+          integrations:
+            - name: myArti
+          sourceLocation: "golang"
+          resolverRepo: local-go
+      - name: S_GoPublishBinary
+        type: GoPublishBinary
+        configuration:
+          inputSteps:
+            - name: S_GoBuild
+          outputResources:
+            - name: R_BuildInfo
+          targetRepository: local-go
+          autoPublishBuildInfo: true
