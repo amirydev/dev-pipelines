@@ -12,13 +12,13 @@ resources:
     configuration:
       sourceArtifactory: myArti
       buildName: 'my_go_build'
-      buildNumber: ${run_id}
+      buildNumber: '${run_id}'
   - name: R_ReleaseBundle
     type: ReleaseBundle
     configuration:
       sourceDistribution: jfdist
       name: my_go_build
-      version: ${run_id}
+      version: '${run_id}'
 
 pipelines:
   - name: pipeline_S_GoPublishBinary
@@ -48,7 +48,7 @@ pipelines:
         type: CreateReleaseBundle
         configuration:
           releaseBundleName: my_go_build
-          releaseBundleVersion: 1
+          releaseBundleVersion: '${run_id}'
           integrations:
             - name: R_GitRepo
           inputResources:
