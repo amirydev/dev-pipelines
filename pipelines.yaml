@@ -7,11 +7,18 @@ resources:
       path: amirydev/dev-pipelines
       branches:
         include: feature-PIPE-5768
-
   - name: S_GoPublishBinary_0028_BuildInfo
     type: BuildInfo
     configuration:
       sourceArtifactory: myArti
+      buildName: 'my_go_build'
+      buildNumber: '1'
+  - name: S_GoPublishBinary_0028_ReleaseBundle
+    type: ReleaseBundle
+    configuration:
+      sourceDistribution: jfdist
+      name: my_go_build
+      version: '1'
 
 pipelines:
   - name: pipeline_S_GoPublishBinary_0028
@@ -37,4 +44,14 @@ pipelines:
             - name: S_GoPublishBinary_0028_BuildInfo
           targetRepository: local-go
           autoPublishBuildInfo: true
-
+      - name: S_GoPublishBinary_0028_3
+        type: CreateReleaseBundle
+        configuration:
+          releaseBundleName: my_go_build
+          releaseBundleVersion: 1
+          integrations:
+            - name: S_GoPublishBinary_0028_GitRepo
+          inputResources:
+            - name: S_GoPublishBinary_0028_BuildInfo
+          outputResources:
+            - name: S_GoPublishBinary_0028_ReleaseBundle
