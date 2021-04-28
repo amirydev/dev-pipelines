@@ -28,6 +28,18 @@ pipelines:
             - name: myArti
           sourceLocation: "golang"
           resolverRepo: local-gen
+      - name: S_GoPublishBinary_0028_2
+        type: GoBuild
+        configuration:
+          environmentVariables:
+            JFROG_CLI_BUILD_NAME: S_GoPublishBinary_0028_buildName
+            JFROG_CLI_BUILD_NUMBER: ${run_id}
+          inputResources:
+            - name: S_GoPublishBinary_0028_GitRepo
+          integrations:
+            - name: myArti
+          sourceLocation: "golang"
+          resolverRepo: local-go
       - name: S_GoPublishBinary_0028_3
         type: GoPublishBinary
         configuration:
@@ -36,4 +48,4 @@ pipelines:
           outputResources:
             - name: S_GoPublishBinary_0028_BuildInfo
           targetRepository: local-gen
-          autoPublishBuildInfo: true
+#          autoPublishBuildInfo: true
