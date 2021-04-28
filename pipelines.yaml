@@ -50,7 +50,7 @@ pipelines:
           releaseBundleName: my_go_build
           releaseBundleVersion: '${run_id}'
           integrations:
-            - name: R_GitRepo
+            - name: github_amirydev
           inputResources:
             - name: R_BuildInfo
           outputResources:
